@@ -1,11 +1,12 @@
 % !Mode:: "TeX:UTF-8"
-\def\usewhat{dvipdfmx}                              % 定义编译方式 dvipdfmx 或者 pdflatex ，默认为 dvipdfmx
-                                                    % 方式编译，如果需要修改，只需改变花括号中的内容即可。
+\def\usewhat{pdflatex}                              % 定义编译方式 dvipdfmx 或者 pdflatex ，默认为 dvipdfmx
+                                                    % 方式编译，如果需要修改，只需改
+                                                    变花括号中的内容即可。
 \documentclass[12pt,openright,twoside]{book}
 \AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{only_foot}}} %强制目录页的第一页的页眉页脚样式
 
 \input{setup/package}                      % 定义本文所使用宏包
-\graphicspath{{figures/}}                  % 定义所有的.eps 文件在figures子目录下
+\graphicspath{{figures/}}                  % 定义所有的.eps 文件在figures 子目录下
 \begin{document}                           % 开始全文
 \begin{CJK*}{UTF8}{song}                   % 开始中文字体使用
 \input{setup/format}                       % 完成对论文各个部分格式的设置
@@ -42,7 +43,7 @@
 %\clearpage{\pagestyle{empty}\cleardoublepage}
 \include{body/third}
 %\clearpage{\pagestyle{empty}\cleardoublepage}
-%\include{body/third_second}
+\include{body/third_second}
 %\clearpage{\pagestyle{empty}\cleardoublepage}
 \include{body/fouth}
 %\clearpage{\pagestyle{empty}\cleardoublepage}

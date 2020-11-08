@@ -2,15 +2,15 @@
 
 
 \ctitle{基于深度学习的超像素分割和图像分割}  %封面用论文标题，自己可手动断行
-\etitle{A Study on Indoor Localization Based on fingerprinting and inertial measurements}
+\etitle{Superpixel Segmentation and Image Segmentation Based on Deep Learning}
 %\etitle{A Study on Subspace Clustering Algorithm \\for High-dimensional Data}
 \caffil{天津大学智能与计算学部} %学院名称
 \csubjecttitle{工程领域}
 \csubject{软件工程}   %专业
 \cauthortitle{作者姓名}     % 学位
-\cauthor{***}   %学生姓名
+\cauthor{王凯}   %学生姓名
 \csupervisortitle{指导教师}
-\csupervisor{***~~教授} %导师姓名
+\csupervisor{李亮} %导师姓名
 \ccorsupervisortitle{企业导师}
 \ccorsupervisor{***}
 
@@ -30,54 +30,77 @@
 
 \cdate{\CJKdigits{\the\year} 年\CJKnumber{\the\month} 月 \CJKnumber{\the\day} 日}
 % 如需改成二零一二年四月二十五日的格式，可以直接输入，即如下所示
-\cdate{二零一六年十月}
+\cdate{二零二零年十月}
 % \cdate{\the\year 年\the\month 月 \the\day 日} % 此日期显示格式为阿拉伯数字 如2012年4月25日
 \cabstract{
 
-图像分割和超像素生成已经被研究很多年，但仍然是计算机视觉中一个重要的课题。
-虽然很多先进的计算机视觉的算法已经被用于图像分割和超像素生成方面，
-但是没有端到端可训练的算法来实现同时产生超像素和图像分割。
-对此，我们提出了一个端到端的可训练网络，它可以同时产生超像素和进行图像分割。
-我们的网络架构如图3-1所示。我们使用完全卷积网络和迭代可微聚类算法来获得超像素。
-接下来，我们采用超像素池层来获得超像素特征，并以此计算相邻超像素之间的相似度。
-如果相似度大于预先设定的阈值，则通过简单的步骤将其合并，得到目标片段。
-我们使用BSDS500数据集训练网络，并将我们的结果与最先进的结果进行比较，并得到了很好的结果。
+图像分割和超像素分割已经被研究很多年，但仍然是计算机视觉中一个重要的课题，
+对于一些高级的图像处理领域具有重要意义，例如人脸识别，指纹识别，场景识别，行人检测，医学影像等。
+基于像素的传统图像分割方法取得了不错的成果，
+但是随着数码产品的拍照功能迅速发展，图像的构成越来越复杂，越来越清晰，像素数量也是成指数级增长。
+在这样的背景下，基于像素的传统图像分割方法处理分辨率高的图像，将花费更多的时间。
+超像素作为一种图像预处理技术解决了这个问题。超像素不仅有效减少了局部的冗余信息，
+后续处理过程中的计算量和复杂度大幅度降低，
+而且更利于局部特征的提取与表达，更有利于帮助定位区域边界。
+本文将超像素分割和图像分割相结合，提出了两个新的算法。本文的主要工作如下：
 
-本文提出的网络具有以下特点：
-\begin{itemize}
-\item 我们的网络是端到端可训练的，可以很容易地组装成其他深层网络结构，以备后续应用。
-\item 我们的网络可以产生超像素并得到分割结果，这是更有效的。与现有算法相比，该算法具有优良的性能和更高的精度。
-\end{itemize}
+（1）本文提出了基于深度学习的超像素分割和图像分割神经网络，可以同时产生超像素和进行图像分割。
+其网络架构如图\ref{fig3.1}所示。首先使用完全卷积网络和迭代可微聚类算法来获得超像素。
+接下来，采用超像素池层来获得超像素特征，并以此计算相邻超像素之间的相似度。
+如果相似度大于预先设定的阈值，则通过简单的步骤将其合并，得到目标片段。
+由于整个网络是端到端可训练的，因此可以很容易地组装到其他神经网络结构中，以备后续应用。
+我们的网络可以产生超像素并得到分割结果，与现有算法相比，该算法具有优良的性能和更高的精度。
+
+（2）本文提出了基于Boruvka算法和快速模糊C均值聚类的图像分割方法，其算法框架如图\ref{fig4.1}所示。
+该方法首先使用一种基于Boruvka算法来产生超像素图像。
+在Boruvka算法获得的超像素图像的基础上，通过计算超像素图像的颜色直方图
+来实现快速模糊C均值聚类算法，实现彩色图像的快速分割。
+Boruvka算法具有线性时间解，可并行化。
+由于超像素图像中不同颜色的数目远小于原始彩色图像，相对于基于像素的分割方法更具高效性。
+
+
 }
 
-\ckeywords{图像分割，超像素，深度学习}
+\ckeywords{图像分割，超像素，深度学习，Boruvka算法}
 
 \eabstract{
 
-Image segmentation and superpixel generation have been studied for many years, 
-and they are still active research topics in computer vision. 
-Although many advanced computer vision algorithms have been used for image segmentation and superpixel generation, 
-there is no end-to-end trainable algorithm that generates superpixels and segment images simultaneously. 
-Specifically, we propose an end-to-end trainable network 
-which can generate superpixels and perform image segmentation simultaneously.
-The architecture of our network is shown in Fig. 3-1. 
-We use a fully convolutional network and the iterative differentiable clustering algorithm to obtain superpixels. 
-Next, we adopt the superpixel pooling layer to get the superpixel features, 
-with which the similarity between adjacent superpixels can be calculated. 
-If the similarity is greater than the preset threshold, 
-we merge them according to a simple procedure to get object segments. 
-We train the network using BSDS500 segmentation benchmark dataset, 
-compare our result with state-of-the-art ones and get good results.
+Image segmentation and superpixel generation have been studied for many years,
+but they are still important topics in computer vision,
+which is of great significance to some advanced image processing fields,
+such as face recognition, fingerprint recognition, traffic control systems, scene recognition, pedestrians Testing, medical imaging, etc.
+Traditional pixel-based image segmentation methods have achieved good results.
+However, with the rapid development of the camera function of digital products,
+the composition of images is becoming more and more complex, the resolution is constantly increasing,
+and the number of pixels is also increasing exponentially.
+In this context, traditional pixel-based image segmentation methods will take more time to process images with high resolution.
+Superpixel as a kind of image preprocessing technology solves this problem.
+Superpixels not only effectively reduce the local redundant information,
+and the amount of calculation and complexity in the subsequent processing are greatly reduced,
+but it is also more conducive to the extraction and expression of local features,
+and it is more conducive to help locate the boundary of the region.
+This paper combines the existing super pixel segmentation and image segmentation,
+and proposes two new algorithms. The main work of this paper is as follows:
 
-The proposed network has the following characteristics:
-\begin{itemize}
-\item Our network is end-to-end trainable and can be easily as sembled into other deep network structures for subsequent applications.
-\item Our network can generate superpixels and get segmentation results, which is more efficient. The proposed algorithm has excellent performance and has higher precision than existing algorithms.
-\end{itemize}
+(1)This paper proposes an end-to-end trainable network that can simultaneously generate superpixels and perform image segmentation.
+The network architecture is shown in Figure \ref{fig3.1}.
+First, a fully convolutional network and an iterative differentiable clustering algorithm are used to obtain superpixels.
+Next, the super pixel pool layer is used to obtain the super pixel characteristics,
+and the similarity between adjacent super pixels is calculated based on this.
+If the similarity is greater than the preset threshold,
+it is merged through simple steps to obtain the target segment.
+Since the entire network is end-to-end trainable, it can be easily assembled into other deep network structures for subsequent applications.
 
+(2)This paper proposes an image segmentation method based on Boruvka algorithm and fast fuzzy C-means clustering. The algorithm framework is shown in Figure \ref{fig4.1}.
+The method first uses a Boruvka algorithm to generate super-pixel images. 
+On the basis of the super pixel image obtained by the Boruvka algorithm,
+the fast fuzzy C-means clustering algorithm is realized by calculating the histogram of the superpixel image,
+and the fast segmentation of the color image is realized.
+The Boruvka algorithm has a linear time solution and can be parallelized. 
+Since the number of different colors in the superpixel image is much smaller than that of the original color image, it is more efficient than the pixel-based segmentation method.
 }
 
-\ekeywords{Image segmentation, Superpixel, Deep learning}
+\ekeywords{Image segmentation, Superpixel, Deep learning, Boruvka algorithm}
 
 \makecover
 \clearpage
